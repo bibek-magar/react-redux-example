@@ -4,10 +4,11 @@ import createSageMiddleware from "redux-saga";
 
 import rootReducer from "./rootReducer";
 // import rootSaga from "./rootSagas";
+import { fetchDataStart } from "./COVID/covidSagas";
 
-// const sagaMiddleWare = createSageMiddleware();
+const sagaMiddleWare = createSageMiddleware();
 
-const middlewares = [];
+const middlewares = [sagaMiddleWare];
 
 if (process.env.NODE_ENV === "development") {
   middlewares.push(logger);
@@ -15,6 +16,6 @@ if (process.env.NODE_ENV === "development") {
 
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
-// sagaMiddleWare.run(rootSaga);
+sagaMiddleWare.run(fetchDataStart);
 
 export default store;
